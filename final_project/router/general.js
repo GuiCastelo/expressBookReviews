@@ -1,8 +1,9 @@
 const express = require('express');
+const axios = require('axios').default;
 let books = require("./booksdb.js");
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
-
+const env = 'http://localhost:5000';
 
 public_users.post("/register", (req,res) => {
   const username = req.body.username;
@@ -60,5 +61,61 @@ public_users.get('/review/:isbn',function (req, res) {
     res.status(200).json(reviews):
     res.status(404).json({ message: 'There is no book with this ISBN' });
 });
+
+//Get all books with Axios
+const getAllBooks = () => {
+  const request = axios.get(`${env}`);
+  request
+    .then((resp) => {
+      console.log('API returned a response');
+      console.log(resp);
+    })
+    .catch((err) => {
+      console.log('API returned an error');
+      console.log(err);
+    });
+};
+
+//Get book by ISBN with Axios
+const getBookByIsbn = () => {
+  const request = axios.get(`${env}/isbn/1`);
+  request
+    .then((resp) => {
+      console.log('API returned a response');
+      console.log(resp);
+    })
+    .catch((err) => {
+      console.log('API returned an error');
+      console.log(err);
+    });
+};
+
+//Get books by author with Axios
+const getBooksByAuthor = () => {
+  const request = axios.get(`${env}/author/Samuel Beckett`);
+  request
+    .then((resp) => {
+      console.log('API returned a response');
+      console.log(resp);
+    })
+    .catch((err) => {
+      console.log('API returned an error');
+      console.log(err);
+    });
+};
+
+//Get books by title with Axios
+const getBooksByTitle = () => {
+  const request = axios.get(`${env}/title/Molloy, Malone Dies, The Unnamable, the trilogy`);
+  request
+    .then((resp) => {
+      console.log('API returned a response');
+      console.log(resp);
+    })
+    .catch((err) => {
+      console.log('API returned an error');
+      console.log(err);
+    });
+};
 
 module.exports.general = public_users;
