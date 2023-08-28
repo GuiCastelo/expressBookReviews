@@ -3,7 +3,6 @@ const axios = require('axios').default;
 let books = require("./booksdb.js");
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
-const env = 'http://localhost:5000';
 
 public_users.post("/register", (req,res) => {
   const username = req.body.username;
@@ -64,7 +63,7 @@ public_users.get('/review/:isbn',function (req, res) {
 
 //Get all books with Axios
 const getAllBooks = () => {
-  const request = axios.get(`${env}`);
+  const request = axios.get('http://localhost:5000');
   request
     .then((resp) => {
       console.log('API returned a response');
@@ -78,7 +77,7 @@ const getAllBooks = () => {
 
 //Get book by ISBN with Axios
 const getBookByIsbn = () => {
-  const request = axios.get(`${env}/isbn/1`);
+  const request = axios.get('http://localhost:5000/isbn/1');
   request
     .then((resp) => {
       console.log('API returned a response');
@@ -92,7 +91,7 @@ const getBookByIsbn = () => {
 
 //Get books by author with Axios
 const getBooksByAuthor = () => {
-  const request = axios.get(`${env}/author/Samuel Beckett`);
+  const request = axios.get('http://localhost:5000/author/Samuel Beckett');
   request
     .then((resp) => {
       console.log('API returned a response');
@@ -106,7 +105,7 @@ const getBooksByAuthor = () => {
 
 //Get books by title with Axios
 const getBooksByTitle = () => {
-  const request = axios.get(`${env}/title/Molloy, Malone Dies, The Unnamable, the trilogy`);
+  const request = axios.get('http://localhost:5000/title/Molloy, Malone Dies, The Unnamable, the trilogy');
   request
     .then((resp) => {
       console.log('API returned a response');
